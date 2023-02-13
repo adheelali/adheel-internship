@@ -6,14 +6,13 @@ function Newitem({ items }) {
   const [minutestext, setMinutesText] = useState();
   const [hoursText, setHoursText] = useState();
   let cancelId;
-  let timeLeft;
 
   function StartTime() {
     cancelId = requestAnimationFrame(updateTime);
   }
 
   function updateTime() {
-    timeLeft = items.expiryDate - Date.now();
+    let timeLeft = items.expiryDate - Date.now();
     let seconds = Math.floor(timeLeft / 1000);
     let minutes = Math.floor(seconds / 60);
     let hours = Math.floor(minutes / 60);
