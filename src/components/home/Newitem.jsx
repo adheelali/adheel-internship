@@ -20,7 +20,7 @@ function Newitem({ items }) {
 
     if (timeLeft < 0) {
       cancelAnimationFrame(cancelId);
-      cancelId = null
+      cancelId = null;
     }
 
     setSecondsText(seconds % 100);
@@ -49,9 +49,10 @@ function Newitem({ items }) {
           <i className="fa fa-check"></i>
         </Link>
       </div>
+
       {items.expiryDate && (
         <div className="de_countdown">
-          {timeLeft > 0 ? (
+          {secondsText > 0 ? (
             <span>
               {hoursText}h {minutestext}m {secondsText}s
             </span>
