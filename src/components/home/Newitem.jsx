@@ -20,14 +20,16 @@ function Newitem({ items }) {
 
     if (timeLeft < 0) {
       cancelAnimationFrame(cancelId);
-      return;
+      cancelId = null
     }
 
     setSecondsText(seconds % 100);
     setMinutesText(minutes % 60);
     setHoursText(hours % 60);
 
-    cancelId = requestAnimationFrame(updateTime);
+    if (cancelId) {
+      cancelId = requestAnimationFrame(updateTime);
+    }
   }
 
   useEffect(() => {
