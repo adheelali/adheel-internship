@@ -31,6 +31,10 @@ const Author = () => {
 
   useEffect(() => {
     getAuthor();
+
+    return () => {
+      setAuthor([]);
+    };
   }, []);
 
   return (
@@ -125,7 +129,7 @@ const Author = () => {
                   </div>
                 </div>
               </div>
-              
+
               <div className="col-md-12">
                 <div className="de_tab tab_simple">
                   {loading ? (
@@ -147,7 +151,11 @@ const Author = () => {
                                   backgroundSize: "cover",
                                 }}
                               >
-                                <Skeleton width="100%" height="420px" borderRadius='10px'/>
+                                <Skeleton
+                                  width="100%"
+                                  height="420px"
+                                  borderRadius="10px"
+                                />
                               </div>
                             ))}
                           </div>
