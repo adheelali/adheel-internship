@@ -3,17 +3,21 @@ import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import ReactOwlCarousel from "react-owl-carousel";
 import Skeleton from "../UI/Skeleton.jsx";
+import AOS from "aos";
+import "aos/dist/aos.css";
 
 const HotCollections = () => {
   const [hotCollection, setHotCollection] = useState([]);
 
+  async function getHotCollection() {
+    const { data } = await axios.get(
+      "https://us-central1-nft-cloud-functions.cloudfunctions.net/hotCollections"
+    );
+    setHotCollection(data);
+  }
+
   useEffect(() => {
-    async function getHotCollection() {
-      const { data } = await axios.get(
-        "https://us-central1-nft-cloud-functions.cloudfunctions.net/hotCollections"
-      );
-      setHotCollection(data);
-    }
+    AOS.init();
     getHotCollection();
 
     return () => {
@@ -27,13 +31,30 @@ const HotCollections = () => {
         <div className="row">
           <div className="col-lg-12">
             <div className="text-center">
-              <h2>Hot Collections</h2>
-              <div className="small-border bg-color-2"></div>
+              <h2
+                data-aos="fade"
+                data-aos-duration="1000"
+                data-aos-once="true"
+                data-aos-anchor-placement="top-bottom"
+              >
+                Hot Collections
+              </h2>
+              <div
+                data-aos="fade"
+                data-aos-duration="1000"
+                data-aos-once="true"
+                data-aos-anchor-placement="top-bottom"
+                className="small-border bg-color-2"
+              ></div>
             </div>
           </div>
           {/* className="col-lg-3 col-md-6 col-sm-6 col-xs-12" */}
           {hotCollection.length ? (
             <ReactOwlCarousel
+              data-aos="fade"
+              data-aos-duration="1000"
+              data-aos-once="true"
+              data-aos-anchor-placement="top-bottom"
               nav={true}
               margin={10}
               loop
@@ -85,6 +106,10 @@ const HotCollections = () => {
           ) : (
             <>
               <ReactOwlCarousel
+                data-aos="fade"
+                data-aos-duration="1000"
+                data-aos-once="true"
+                data-aos-anchor-placement="top-bottom"
                 nav={true}
                 margin={10}
                 loop

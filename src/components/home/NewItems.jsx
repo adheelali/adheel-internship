@@ -4,6 +4,8 @@ import { Link } from "react-router-dom";
 import ReactOwlCarousel from "react-owl-carousel";
 import Skeleton from "../UI/Skeleton";
 import Newitem from "./Newitem";
+import AOS from 'aos'
+import 'aos/dist/aos.css';
 
 const NewItems = () => {
   const [newItems, setNewItems] = useState([]);
@@ -14,8 +16,9 @@ const NewItems = () => {
     );
     setNewItems(data);
   }
-  
+
   useEffect(() => {
+    AOS.init()
     getNewItems();
   }, []);
 
@@ -25,13 +28,30 @@ const NewItems = () => {
         <div className="row">
           <div className="col-lg-12">
             <div className="text-center">
-              <h2>New Items</h2>
-              <div className="small-border bg-color-2"></div>
+              <h2
+                data-aos="fade"
+                data-aos-duration="1000"
+                data-aos-once="true"
+                data-aos-anchor-placement="top-bottom"
+              >
+                New Items
+              </h2>
+              <div
+                data-aos="fade"
+                data-aos-duration="1000"
+                data-aos-once="true"
+                data-aos-anchor-placement="top-bottom"
+                className="small-border bg-color-2"
+              ></div>
             </div>
           </div>
           {/* className="col-lg-3 col-md-6 col-sm-6 col-xs-12" */}
           {newItems.length ? (
             <ReactOwlCarousel
+              data-aos="fade"
+              data-aos-duration="1000"
+              data-aos-once="true"
+              data-aos-anchor-placement="top-bottom"
               nav={true}
               margin={10}
               loop
@@ -51,12 +71,16 @@ const NewItems = () => {
               }}
             >
               {newItems.map((items) => (
-                <Newitem items={items} key={items.id}/>
+                <Newitem items={items} key={items.id} />
               ))}
             </ReactOwlCarousel>
           ) : (
             <>
               <ReactOwlCarousel
+                data-aos="fade"
+                data-aos-duration="1000"
+                data-aos-once="true"
+                data-aos-anchor-placement="top-bottom"
                 nav={true}
                 margin={10}
                 loop
