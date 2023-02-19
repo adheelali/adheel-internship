@@ -3,6 +3,8 @@ import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import Newitem from "../home/Newitem";
 import Skeleton from "../UI/Skeleton";
+import AOS from "aos";
+import 'aos/dist/aos.css';
 
 const ExploreItems = () => {
   const [items, setItems] = useState([]);
@@ -10,7 +12,9 @@ const ExploreItems = () => {
 
   async function getExploreItems(filterValue) {
     const { data } = await axios.get(
-      `https://us-central1-nft-cloud-functions.cloudfunctions.net/explore?filter=${filterValue || ''}`
+      `https://us-central1-nft-cloud-functions.cloudfunctions.net/explore?filter=${
+        filterValue || ""
+      }`
     );
     setItems(data);
   }
@@ -18,20 +22,30 @@ const ExploreItems = () => {
   function loadMoreItems() {
     setSlicer(slicer + 4);
   }
-   
+
   function selectOptions(value) {
-    setItems([])
-    getExploreItems(value)
+    setItems([]);
+    getExploreItems(value);
   }
 
   useEffect(() => {
+    AOS.init();
     getExploreItems();
   }, []);
 
   return (
     <>
-      <div>
-        <select onChange={(event) => selectOptions(event.target.value)} id="filter-items" defaultValue="">
+      <div
+        data-aos="fade"
+        data-aos-duration="200"
+        data-aos-once="true"
+        data-aos-anchor-placement="top-bottom"
+      >
+        <select
+          onChange={(event) => selectOptions(event.target.value)}
+          id="filter-items"
+          defaultValue=""
+        >
           <option value="">Default</option>
           <option value="price_low_to_high">Price, Low to High</option>
           <option value="price_high_to_low">Price, High to Low</option>
@@ -42,6 +56,10 @@ const ExploreItems = () => {
         <>
           {items.slice(0, slicer).map((items) => (
             <div
+              data-aos="fade"
+              data-aos-duration="200"
+              data-aos-once="true"
+              data-aos-anchor-placement="top-bottom"
               className="d-item col-lg-3 col-md-6 col-sm-6 col-xs-12"
               style={{ display: "block", backgroundSize: "cover" }}
               key={items.id}
@@ -54,6 +72,10 @@ const ExploreItems = () => {
         <>
           {new Array(slicer).fill(0).map((_, index) => (
             <div
+              data-aos="fade"
+              data-aos-duration="200"
+              data-aos-once="true"
+              data-aos-anchor-placement="top-bottom"
               key={index}
               className="d-item col-lg-3 col-md-6 col-sm-6 col-xs-12"
               style={{ display: "block", backgroundSize: "cover" }}
@@ -64,7 +86,13 @@ const ExploreItems = () => {
         </>
       )}
       {slicer !== items.length && (
-        <div className="col-md-12 text-center">
+        <div
+          data-aos="fade"
+          data-aos-duration="200"
+          data-aos-once="true"
+          data-aos-anchor-placement="top-bottom"
+          className="col-md-12 text-center"
+        >
           <Link
             to=""
             id="loadmore"

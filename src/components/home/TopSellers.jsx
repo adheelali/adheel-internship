@@ -2,6 +2,8 @@ import axios from "axios";
 import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import Skeleton from "../UI/Skeleton";
+import AOS from "aos";
+import 'aos/dist/aos.css';
 
 const TopSellers = () => {
   const [topSellers, setTopSellers] = useState([]);
@@ -14,6 +16,7 @@ const TopSellers = () => {
   }
 
   useEffect(() => {
+    AOS.init();
     getTopsellers();
   }, []);
 
@@ -23,8 +26,21 @@ const TopSellers = () => {
         <div className="row">
           <div className="col-lg-12">
             <div className="text-center">
-              <h2>Top Sellers</h2>
-              <div className="small-border bg-color-2"></div>
+              <h2
+                data-aos="fade"
+                data-aos-duration="1000"
+                data-aos-once="true"
+                data-aos-anchor-placement="top-bottom"
+              >
+                Top Sellers
+              </h2>
+              <div
+                data-aos="fade"
+                data-aos-duration="1000"
+                data-aos-once="true"
+                data-aos-anchor-placement="top-bottom"
+                className="small-border bg-color-2"
+              ></div>
             </div>
           </div>
           <div className="col-md-12">
@@ -32,7 +48,13 @@ const TopSellers = () => {
               {topSellers.length ? (
                 <>
                   {topSellers.map((author) => (
-                    <li key={author.id}>
+                    <li
+                      data-aos="fade"
+                      data-aos-duration="1000"
+                      data-aos-once="true"
+                      data-aos-anchor-placement="top-bottom"
+                      key={author.id}
+                    >
                       <div className="author_list_pp">
                         <Link to={`/author/${author.authorId}`}>
                           <img
@@ -53,7 +75,13 @@ const TopSellers = () => {
               ) : (
                 <>
                   {new Array(12).fill(0).map((_, index) => (
-                    <li key={index}>
+                    <li
+                      data-aos="fade"
+                      data-aos-duration="1000"
+                      data-aos-once="true"
+                      data-aos-anchor-placement="top-bottom"
+                      key={index}
+                    >
                       <div className="author_list_pp">
                         <Link to="/author">
                           <Skeleton
